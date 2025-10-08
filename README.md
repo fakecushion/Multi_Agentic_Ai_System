@@ -1,6 +1,7 @@
 # Multi-Agent AI System with Dynamic Decision Making
 
 This project implements a complete multi-agent AI system that dynamically decides which agent(s) to call for a user query. The system includes a FastAPI backend, a minimal frontend, and uses various agents for processing different types of queries.
+link for huggingface = https://huggingface.co/spaces/Anshu0096/Multi_agentic_ai_assistant_project
 
 ## Features
 
@@ -158,5 +159,6 @@ python final_verification.py
 - See `requirements.txt` for Python package dependencies
 
 ## License
+
 
 This project is licensed under the Apache 2.0 License - see the LICENSE file for details.
