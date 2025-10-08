@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Agent AI System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border-radius: 5px;
+            display: none;
+        }
+        .agents-used {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
+        }
+        .decision-rationale {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #fff3e0;
+            border-radius: 5px;
+        }
+        .log-entry {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .loading {
+            text-align: center;
+            display: none;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .notification {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+        }
+        .notification.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .notification.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Multi-Agent AI System</h1>
+        
+        <!-- Notification Area -->
+        <div id="notification" class="notification"></div>
+        
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Processing your request...</p>
+        </div>
+        
+        <!-- Search Box -->
+        <div class="form-group">
+            <label for="question">Ask a Question:</label>
+            <textarea id="question" placeholder="Enter your question here..." rows="3"></textarea>
+            <button id="askBtn">Get Answer</button>
+        </div>
+        
+        <!-- PDF Upload Widget -->
+        <div class="form-group">
+            <label for="pdfFile">Upload PDF:</label>
+            <input type="file" id="pdfFile" accept=".pdf">
+            <button id="uploadBtn">Upload PDF</button>
+        </div>
+        
+        <!-- Result Area -->
+        <div id="result" class="result">
+            <h3>Answer:</h3>
+            <p id="answer"></p>
+            
+            <div class="agents-used">
+                <h4>Agents Used:</h4>
+                <ul id="agentsList"></ul>
+            </div>
+            
+            <div class="decision-rationale">
+                <h4>Decision Rationale:</h4>
+                <p id="rationale"></p>
+            </div>
+        </div>
+        
+        <!-- Logs Section -->
+        <div style="margin-top: 30px;">
+            <h3>Recent Logs:</h3>
+            <button id="loadLogsBtn">Load Logs</button>
+            <div id="logs" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = "http://localhost:8000"; // Change this to your deployed URL
+        
+        // DOM Elements
+        const questionEl = document.getElementById('question');
+        const askBtn = document.getElementById('askBtn');
+        const pdfFileEl = document.getElementById('pdfFile');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const resultEl = document.getElementById('result');
+        const answerEl = document.getElementById('answer');
+        const agentsListEl = document.getElementById('agentsList');
+        const rationaleEl = document.getElementById('rationale');
+        const loadLogsBtn = document.getElementById('loadLogsBtn');
+        const logsEl = document.getElementById('logs');
+        const loadingEl = document.getElementById('loading');
+        const notificationEl = document.getElementById('notification');
+        
+        // Event Listeners
+        askBtn.addEventListener('click', askQuestion);
+        uploadBtn.addEventListener('click', uploadPDF);
+        loadLogsBtn.addEventListener('click', loadLogs);
+        
+        // Functions
+        async function askQuestion() {
+            const question = questionEl.value.trim();
+            if (!question) {
+                showNotification('Please enter a question', 'error');
+                return;
+            }
+            
+            showLoading(true);
+            hideResult();
+            hideNotification();
+            
+            try {
+                const response = await fetch(`${API_BASE}/ask`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question: question })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                displayResult(data);
+                showNotification('Question processed successfully', 'success');
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification(`Error: ${error.message}`, 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        async function uploadPDF() {
+            const file = pdfFileEl.files[0];
+            if (!file) {
+                showNotification('Please select a PDF file', 'error');
+                return;
+            }
+            
+            if (file.type !== 'application/pdf') {
+                showNotification('Please select a PDF file', 'error');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            showLoading(true);
+            hideNotification();
+            
+            try {
+                const response = await fetch(`${API_BASE}/upload_pdf`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                showNotification(data.message, 'success');
+                pdfFileEl.value = ''; // Clear file input
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification(`Error uploading PDF: ${error.message}`, 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        async function loadLogs() {
+            showLoading(true);
+            logsEl.innerHTML = '';
+            
+            try {
+                const response = await fetch(`${API_BASE}/logs`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                displayLogs(data.logs);
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification(`Error loading logs: ${error.message}`, 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        function displayResult(data) {
+            // Display answer
+            answerEl.textContent = data.answer;
+            
+            // Display agents used
+            agentsListEl.innerHTML = '';
+            data.agents_used.forEach(agent => {
+                const li = document.createElement('li');
+                li.textContent = agent.name;
+                agentsListEl.appendChild(li);
+            });
+            
+            // Display decision rationale (from first agent)
+            if (data.agents_used.length > 0) {
+                rationaleEl.textContent = data.agents_used[0].rationale;
+            } else {
+                rationaleEl.textContent = 'No specific rationale provided';
+            }
+            
+            // Show result area
+            resultEl.style.display = 'block';
+        }
+        
+        function displayLogs(logs) {
+            logsEl.innerHTML = '';
+            
+            if (!logs || logs.length === 0) {
+                logsEl.innerHTML = '<p>No logs available</p>';
+                return;
+            }
+            
+            // Show latest 5 logs
+            const latestLogs = logs.slice(-5).reverse();
+            
+            latestLogs.forEach(log => {
+                const logDiv = document.createElement('div');
+                logDiv.className = 'log-entry';
+                logDiv.innerHTML = `
+                    <strong>Input:</strong> ${log.input.substring(0, 50)}${log.input.length > 50 ? '...' : ''}<br>
+                    <strong>Agents:</strong> ${log.agents_called.join(', ')}<br>
+                    <strong>Time:</strong> ${new Date(log.timestamp).toLocaleString()}
+                `;
+                logsEl.appendChild(logDiv);
+            });
+        }
+        
+        function showLoading(show) {
+            if (show) {
+                loadingEl.style.display = 'block';
+            } else {
+                loadingEl.style.display = 'none';
+            }
+        }
+        
+        function showResult() {
+            resultEl.style.display = 'block';
+        }
+        
+        function hideResult() {
+            resultEl.style.display = 'none';
+        }
+        
+        function showNotification(message, type) {
+            notificationEl.textContent = message;
+            notificationEl.className = `notification ${type}`;
+            notificationEl.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                hideNotification();
+            }, 5000);
+        }
+        
+        function hideNotification() {
+            notificationEl.style.display = 'none';
+        }
+        
+        // Load logs on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLogs();
+        });
+    </script>
+</body>
+</html>

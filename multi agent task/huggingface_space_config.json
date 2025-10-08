@@ -1,0 +1,19 @@
+{
+  "title": "Multi-Agent AI System",
+  "sdk": "docker",
+  "app_port": 7860,
+  "license": "apache-2.0",
+  "tags": [
+    "ai",
+    "multi-agent",
+    "rag",
+    "pdf-processing",
+    "web-search",
+    "arxiv"
+  ],
+  "short_description": "A multi-agent AI system that dynamically decides which agent(s) to call for a user query.",
+  "description": "This project implements a multi-agent AI system with dynamic decision making. The system includes a Controller agent that routes queries to specialized agents including PDF RAG, Web Search, and ArXiv agents. Features include PDF document processing, web search capabilities, and academic paper retrieval from ArXiv.",
+  "models": [],
+  "datasets": [],
+  "spaces": []
+}

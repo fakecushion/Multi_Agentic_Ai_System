@@ -1,0 +1,174 @@
+[
+  {
+    "input": "What does the NebulaByte document say about RAG implementation?",
+    "decision": "{'pdf_rag': 'Question relates to PDF/document content'}",
+    "agents_called": [
+      "pdf_rag"
+    ],
+    "documents_retrieved": [
+      "57c1985f-319d-4ec3-ac50-c661895a626f",
+      "aa44e9f6-55f6-4c67-93e3-861ea9f57ffa",
+      "bee92f7f-1e20-40e9-a234-f8d709a5cd4f"
+    ],
+    "final_answer": "From PDF documents: NebulaByte AI Consultation - RAG Implementation Details Date: October 6, 2025 Participants: Dr. Sarah Chen (Lead AI Architect), James Wilson (ML Engineer), Lisa Wong (Product Manager) Retrieval-Augmen... NebulaByte AI Consultation - Web Search and ArXiv Integration Date: October 7, 2025 Participants: Dr. Sarah Chen (Lead AI Architect), Emma Thompson (Data Scientist), Michael Rodriguez (Software Engine...",
+    "timestamp": "2025-10-07T18:33:40.495386"
+  },
+  {
+    "input": "Summarize the PDF about security considerations",
+    "decision": "{'pdf_rag': 'Question relates to PDF/document content'}",
+    "agents_called": [
+      "pdf_rag"
+    ],
+    "documents_retrieved": [
+      "980f1f12-2d5f-42c2-9a5a-590948d02aed",
+      "bee92f7f-1e20-40e9-a234-f8d709a5cd4f",
+      "57c1985f-319d-4ec3-ac50-c661895a626f"
+    ],
+    "final_answer": "From PDF documents: NebulaByte AI Consultation - Technical Architecture Discussion Date: October 5, 2025 Participants: Dr. Sarah Chen (Lead AI Architect), Michael Rodriguez (Software Engineer), Lisa Wong (Product Manager... NebulaByte AI Consultation - Deployment and Security Considerations Date: October 9, 2025 Participants: Dr. Sarah Chen (Lead AI Architect), Michael Rodriguez (Software Engineer), Lisa Wong (Product Ma...",
+    "timestamp": "2025-10-07T18:33:40.683483"
+  },
+  {
+    "input": "what is flower",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: Flower: Flowers, also known as blossoms and blooms, are the reproductive structures of flowering plants. Typ... Flower | Definition, Parts, Anatomy, Whorls, Types, & Facts: Flower, the characteristic reproductive structure of angiosperms. As popularly used, the term \u201cflowe...",
+    "timestamp": "2025-10-07T18:47:03.676086"
+  },
+  {
+    "input": "what is linux and sql",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: Overview of SQL Server on Linux: SQL Server runs on Linux, starting with SQL Server 2017 (14.x). It's the same SQL Server Database En... What is the difference between \"Linux\" and \"Linux with SQL ...: SQL web includes a license for Microsoft sql web edition. Web edition has a much larger max database...",
+    "timestamp": "2025-10-07T18:48:04.468287"
+  },
+  {
+    "input": "What is AI?",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: What is Artificial Intelligence?: Artificial intelligence refers to computer systems that can perform complex tasks normally done by h... What Is Artificial Intelligence (AI)?: Artificial intelligence (AI) is technology that enables computers and machines to simulate human lea...",
+    "timestamp": "2025-10-07T18:52:01.686890"
+  },
+  {
+    "input": "What are the latest developments in artificial intelligence?",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: The Latest AI News and AI Breakthroughs that Matter Most: Summary: Smart lighting company Lepro has unveiled a new line of AI-powered lights that \"listen\" to ... AI News | Latest AI News, Analysis & Events: Malaysia launches Ryt Bank, its first AI-powered bank \u00b7 Google's Veo 3 AI video creation tools are n...",
+    "timestamp": "2025-10-07T18:52:52.479386"
+  },
+  {
+    "input": "What does the NebulaByte document say about security considerations?",
+    "decision": "{'pdf_rag': 'Question relates to PDF/document content'}",
+    "agents_called": [
+      "pdf_rag"
+    ],
+    "documents_retrieved": [
+      "14088675-a289-44c1-ae4a-c39f7d2c348f",
+      "7e6f8f16-feca-4d75-be61-450f46c32062",
+      "8d96a4a9-6504-46d3-aa1b-68b2882b1eb5"
+    ],
+    "final_answer": "From PDF documents: NebulaByte AI Consultation - Deployment and Security Considerations Date: October 9, 2025 Participants: Dr. Sarah Chen (Lead AI Architect), Michael Rodriguez (Software Engineer), Lisa Wong (Product Ma... NebulaByte AI Consultation - Controller Agent Decision Logic Date: October 8, 2025 Participants: Dr. Sarah Chen (Lead AI Architect), James Wilson (ML Engineer), Emma Thompson (Data Scientist) Controll...",
+    "timestamp": "2025-10-07T18:52:54.601971"
+  },
+  {
+    "input": "Find recent papers on transformer models",
+    "decision": "{'arxiv': 'Question specifically asks for recent papers or arxiv content'}",
+    "agents_called": [
+      "arxiv"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From ArXiv papers: Deep Learning Transformer Architecture for Named Entity Recognition on Low Resourced Languages: State of the art results: This paper reports on the evaluation of Deep Learning (DL) transformer\narchitecture models for Named-Entity Recognition (NER) on ten low-resourced\nSou... Fast Multi-Resolution Transformer Fine-tuning for Extreme Multi-label Text Classification: Extreme multi-label text classification (XMC) seeks to find relevant labels\nfrom an extreme large label collection for a given text input. Many real-w...",
+    "timestamp": "2025-10-07T18:52:58.721743"
+  },
+  {
+    "input": "what is nagpur",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: Nagpur: Nagpur is the largest and most populated city in central India. It is the second capital and third-l... Nagpur | Location, History, Economy, & Facts: Nagpur, city, northeastern Maharashtra state, western India. It lies along the Nag River and is situ...",
+    "timestamp": "2025-10-07T18:55:28.110312"
+  },
+  {
+    "input": "artificial intelligence is what",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: What Is Artificial Intelligence (AI)?: AI is technology that enables computers and machines to simulate human learning, comprehension, prob... What is Artificial Intelligence?: Artificial intelligence refers to computer systems that can perform complex tasks normally done by h...",
+    "timestamp": "2025-10-07T19:17:25.369819"
+  },
+  {
+    "input": "What is AI?",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: What is Artificial Intelligence?: Artificial intelligence refers to computer systems that can perform complex tasks normally done by h... What Is Artificial Intelligence (AI)?: AI is technology that enables computers and machines to simulate human learning, comprehension, prob...",
+    "timestamp": "2025-10-07T21:04:17.694130"
+  },
+  {
+    "input": "What is artificial intelligence?",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: What Is Artificial Intelligence (AI)?: AI is technology that enables computers and machines to simulate human learning, comprehension, prob... What is Artificial Intelligence?: Artificial intelligence refers to computer systems that can perform complex tasks normally done by h...",
+    "timestamp": "2025-10-07T21:05:30.755845"
+  },
+  {
+    "input": "What is artificial intelligence?",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: What Is Artificial Intelligence (AI)?: AI is technology that enables computers and machines to simulate human learning, comprehension, prob... What is Artificial Intelligence?: Artificial intelligence refers to computer systems that can perform complex tasks normally done by h...",
+    "timestamp": "2025-10-08T16:58:57.903672"
+  },
+  {
+    "input": "What is car?",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: Car: A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they ru... CAR Definition & Meaning: 1. a vehicle moving on wheels: such as a archaic : carriage, chariot b : a vehicle designed to move ...",
+    "timestamp": "2025-10-08T17:17:42.142942"
+  },
+  {
+    "input": "What is artificial intelligence?",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: What Is Artificial Intelligence (AI)?: AI is technology that enables computers and machines to simulate human learning, comprehension, prob... What is Artificial Intelligence?: Artificial intelligence refers to computer systems that can perform complex tasks normally done by h...",
+    "timestamp": "2025-10-08T17:39:55.268205"
+  },
+  {
+    "input": "who is the current prime minister of india",
+    "decision": "{'web_search': 'Default agent for general questions'}",
+    "agents_called": [
+      "web_search"
+    ],
+    "documents_retrieved": [],
+    "final_answer": "From web search: Prime Minister of India: Narasimha Rao, Atal Bihari Vajpayee, Manmohan Singh, and Narendra Modi, who is the current prime min... Prime Minister of India: Shri Narendra Modi was sworn-in as India's Prime Minister for the third time on 9th June 2024, follo...",
+    "timestamp": "2025-10-08T17:41:31.237794"
+  }
+]
